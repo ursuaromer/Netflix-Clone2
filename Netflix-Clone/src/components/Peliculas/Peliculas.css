@@ -1,0 +1,160 @@
+.peliculas-container {
+    margin: 0 auto;
+    background-color: #141414;
+    color: #ffffff;
+  }
+  
+  .peliculas-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    padding: 20px 0;
+    border-bottom: 1px solid #333;
+  }
+  
+  .search-form {
+    display: flex;
+    margin-right: 20px;
+  }
+  
+  .search-input {
+    padding: 10px;
+    font-size: 1rem;
+    border: none;
+    background-color: #333;
+    color: #fff;
+    border-radius: 4px 0 0 4px;
+  }
+  
+  .search-button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    border: none;
+    background-color: #e50914;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 0 4px 4px 0;
+    transition: background-color 0.3s;
+  }
+  
+  .search-button:hover {
+    background-color: #f40612;
+  }
+  
+  .categoria-select {
+    padding: 10px;
+    font-size: 1rem;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .carrusel {
+    display: flex;
+    overflow-x: auto;
+    gap: 20px;
+    padding-bottom: 20px;
+  }
+  
+  .pelicula-card {
+    flex: 0 0 auto;
+    width: 200px;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+    cursor: pointer;
+  }
+  
+  .pelicula-card:hover {
+    transform: scale(1.05);
+  }
+  
+  .pelicula-card img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  
+  .pelicula-info {
+    padding: 10px;
+    background-color: rgba(0, 0, 0, 0.7);
+  }
+  
+  .pelicula-info h3 {
+    margin: 0;
+    font-size: 1rem;
+  }
+  
+  .calificacion {
+    color: #ffd700;
+    font-size: 0.9rem;
+    margin-top: 5px;
+  }
+  
+  .modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  .modal-content {
+    background-color: #141414;
+    padding: 30px;
+    border-radius: 8px;
+    max-width: 800px;
+    width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+  }
+  
+  .cerrar {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 2rem;
+    color: #fff;
+    cursor: pointer;
+  }
+  
+  .video-container {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 aspect ratio */
+    height: 0;
+    overflow: hidden;
+    margin-top: 20px;
+  }
+  
+  .video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+  
+  @media (max-width: 768px) {
+    .peliculas-header {
+      flex-direction: column;
+      align-items: stretch;
+    }
+  
+    .search-form {
+      margin-right: 0;
+      margin-bottom: 10px;
+    }
+  
+    .categoria-select {
+      width: 100%;
+    }
+  }
