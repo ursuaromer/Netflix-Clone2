@@ -1,35 +1,43 @@
-import React from 'react';
-import Navegador from '../Navegador/Navegador';
+// src/components/Perfil.jsx
+
+import React, { useState } from 'react';
+import ProfileCard from './ProfileCard';
+import EditProfileModal from './EditProfileModal';
+import ChangePasswordModal from './ChangePasswordModal';
+import { Link, useNavigate } from 'react-router-dom';
 import './Perfil.css';
 
 const Perfil = () => {
+  const [isEditModalOpen, setEditModalOpen] = useState(false);
+  const [isPasswordModalOpen, setPasswordModalOpen] = useState(false);
+  const navigate = useNavigate();
+
+  const openEditModal = () => setEditModalOpen(true);
+  const closeEditModal = () => setEditModalOpen(false);
+
+  const openPasswordModal = () => setPasswordModalOpen(true);
+  const closePasswordModal = () => setPasswordModalOpen(false);
+
+  const handleLogout = () => {
+    // Aquí puedes agregar la lógica para cerrar sesión, como limpiar el estado de autenticación, tokens, etc.
+    navigate('/');
+  };
+
   return (
     <div className="perfil-container">
-      <Navegador />
-      <div className="perfil-content">
-        <div className="perfil-header">
-          <h1>¿Quién está viendo ahora?</h1>
-        </div>
-        <div className="perfiles">
-          <div className="perfil">
-            <img src="https://via.placeholder.com/150" alt="Usuario 1" />
-            <span>Usuario 1</span>
-          </div>
-          <div className="perfil">
-            <img src="https://via.placeholder.com/150" alt="Usuario 2" />
-            <span>Usuario 2</span>
-          </div>
-          <div className="perfil">
-            <img src="https://via.placeholder.com/150" alt="Usuario 3" />
-            <span>Usuario 3</span>
-          </div>
-          <div className="perfil">
-            <img src="https://via.placeholder.com/150" alt="Usuario 4" />
-            <span>Usuario 4</span>
-          </div>
-        </div>
-        <button className="administrar-perfiles">Administrar perfiles</button>
+      <div className='btn-regresar'>
+        <Link className='regre' to="/Inicio">Regresar</Link>
       </div>
+      <h1>Configuración de Perfil</h1>
+      <ProfileCard
+        openEditModal={openEditModal}
+        openPasswordModal={openPasswordModal}
+      />
+      <EditProfileModal isOpen={isEditModalOpen} onClose={closeEditModal} />
+      <ChangePasswordModal isOpen={isPasswordModalOpen} onClose={closePasswordModal} />
+      <button className="cerrar-sesion" onClick={handleLogout}>
+        Cerrar Sesión
+      </button>
     </div>
   );
 };

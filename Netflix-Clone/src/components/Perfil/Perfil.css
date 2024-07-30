@@ -1,67 +1,220 @@
+/* src/styles/Perfil.css */
+
+/* Estilos generales */
 .perfil-container {
-    background-color: #141414;
-    min-height: 100vh;
-    color: white;
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  text-align: center;
+  padding: 20px;
+  color: #fff;
+  background-color: #141414;
+  min-height: 100vh;
+}
+
+.perfil-container .btn-regresar {
+  width: 100px;
+  border: 2px solid white;
+  background-color: #333;
+  border-radius: 4%;
+}
+
+.perfil-container .btn-regresar .regre {
+  text-decoration: none;
+  color: white;
+  transform: scale(1);
+}
+
+.perfil-container .btn-regresar .regre:hover {
+  transition: 1s;
+}
+
+.profile-card {
+  margin: 0 auto;
+  margin-top: 6%;
+  padding: 20px; /* Reducido para pantallas pequeñas */
+  background-color: #333;
+  border-radius: 8px;
+  width: 90%; /* Ancho adaptado */
+  max-width: 500px; /* Máximo ancho */
+  height: auto; /* Ajuste automático de la altura */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.profile-pic {
+  width: 80px; /* Reducido para pantallas pequeñas */
+  height: 80px; /* Reducido para pantallas pequeñas */
+  border-radius: 50%;
+}
+
+.edit-button,
+.password-button {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  background-color: #e50914;
+  border: none;
+  border-radius: 4px;
+  color: #fff;
+  cursor: pointer;
+}
+
+.edit-button:hover,
+.password-button:hover {
+  background-color: #b20710;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal {
+  background: #333;
+  padding: 20px;
+  border-radius: 8px;
+  color: #fff;
+  width: 90%; /* Ancho adaptado */
+  max-width: 500px; /* Máximo ancho */
+  height: auto; /* Ajuste automático de la altura */
+  text-align: left;
+  position: relative;
+}
+
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.modal h2 {
+  margin-top: 0;
+}
+
+.modal form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.modal label {
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+.modal input {
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 100%;
+}
+
+.toggle-password-button {
+  background-color: #e50914;
+  color: #fff;
+  border: none;
+  padding: 5px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.submit-button {
+  background-color: #e50914;
+  color: #fff;
+  border: none;
+  padding: 10px;
+  width: 100%;
+  max-width: 200px; /* Máximo ancho */
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.submit-button:hover,
+.toggle-password-button:hover {
+  background-color: #b20710;
+}
+
+/* Botón de cerrar sesión */
+.cerrar-sesion {
+  display: inline-block;
+  padding: 10px 20px;
+  margin-top: 20px;
+  background-color: #e50914;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.cerrar-sesion:hover {
+  background-color: #b20710;
+}
+
+.cerrar-sesion:active {
+  background-color: #800d09;
+}
+
+.cerrar-sesion:focus {
+  outline: none;
+}
+
+/* Consultas de medios para dispositivos más pequeños */
+@media (max-width: 768px) {
+  .profile-card {
+    padding: 10px; /* Ajuste de padding */
+    width: 95%; /* Ancho adaptado */
   }
-  
-  .perfil-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding-top: 100px;
+
+  .profile-pic {
+    width: 60px; /* Ajuste para pantallas más pequeñas */
+    height: 60px; /* Ajuste para pantallas más pequeñas */
   }
-  
-  .perfil-header h1 {
-    font-size: 3.5vw;
-    font-weight: 400;
-    margin-bottom: 30px;
+
+  .submit-button {
+    width: 100%; /* Ajuste para botones */
+    max-width: none; /* Elimina el máximo ancho */
   }
-  
-  .perfiles {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    max-width: 80%;
+
+  .modal {
+    width: 90%; /* Ajuste de ancho */
+    height: auto; /* Ajuste automático de la altura */
   }
-  
-  .perfil {
-    margin: 0 2vw 20px;
-    cursor: pointer;
-    transition: all 0.2s ease;
+
+  .cerrar-sesion {
+    width: 100%; /* Ajuste para pantallas pequeñas */
+    max-width: none; /* Elimina el máximo ancho */
   }
-  
-  .perfil:hover {
-    transform: scale(1.1);
+}
+
+@media (max-width: 480px) {
+  .profile-card {
+    padding: 5px; /* Ajuste de padding para pantallas muy pequeñas */
   }
-  
-  .perfil img {
-    width: 10vw;
-    max-width: 200px;
-    min-width: 84px;
-    border-radius: 4px;
+
+  .profile-pic {
+    width: 50px; /* Ajuste para pantallas muy pequeñas */
+    height: 50px; /* Ajuste para pantallas muy pequeñas */
   }
-  
-  .perfil span {
-    display: block;
-    text-align: center;
-    font-size: 1.3vw;
-    margin-top: 10px;
-    color: #808080;
+
+  .submit-button {
+    padding: 8px; /* Ajuste de padding */
   }
-  
-  .administrar-perfiles {
-    margin-top: 50px;
-    padding: 10px 20px;
-    font-size: 1.2vw;
-    background-color: transparent;
-    color: #808080;
-    border: 1px solid #808080;
-    cursor: pointer;
-    transition: all 0.2s ease;
-  }
-  
-  .administrar-perfiles:hover {
-    color: white;
-    border-color: white;
-  }
+}

@@ -8,7 +8,7 @@ const BASE_URL = 'https://api.themoviedb.org/3';
 const IMAGE_BASE_URL = 'https://image.tmdb.org/t/p/w500';
 
 const Inicio = () => {
-  const [fullscreenMovie, setFullscreenMovie] = useState(null);
+  const [selectedMovie, setSelectedMovie] = useState(null);
   const [featuredMovie, setFeaturedMovie] = useState(null);
   const [popularMovies, setPopularMovies] = useState([]);
   const [topRatedMovies, setTopRatedMovies] = useState([]);
@@ -49,7 +49,7 @@ const Inicio = () => {
     }
   };
 
-  const openFullscreen = async (movie) => {
+  const openModal = async (movie) => {
     try {
       const response = await axios.get(`${BASE_URL}/movie/${movie.id}/videos`, {
         params: {
@@ -58,7 +58,7 @@ const Inicio = () => {
         }
       });
       const trailer = response.data.results.find(video => video.type === 'Trailer');
-      setFullscreenMovie({
+      setSelectedMovie({
         ...movie,
         trailerUrl: trailer ? `https://www.youtube.com/embed/${trailer.key}` : null
       });
@@ -67,8 +67,8 @@ const Inicio = () => {
     }
   };
 
-  const closeFullscreen = () => {
-    setFullscreenMovie(null);
+  const closeModal = () => {
+    setSelectedMovie(null);
   };
 
   return (
@@ -79,11 +79,11 @@ const Inicio = () => {
       </header>
       <main>
         {featuredMovie && (
-          <section className="featured-content" onClick={() => openFullscreen(featuredMovie)}>
+          <section className="featured-content" onClick={() => openModal(featuredMovie)}>
             <img src={`${IMAGE_BASE_URL}${featuredMovie.backdrop_path}`} alt={featuredMovie.title} />
             <div className="featured-overlay">
               <h2>{featuredMovie.title}</h2>
-              <button className="play-button" onClick={() => openFullscreen(featuredMovie)}>▶ Reproducir</button>
+              <button className="play-button">▶ Reproducir</button>
             </div>
           </section>
         )}
@@ -91,7 +91,7 @@ const Inicio = () => {
           <h2>Películas Populares</h2>
           <div className="movie-list">
             {popularMovies.map(movie => (
-              <div key={movie.id} className="movie-item" onClick={() => openFullscreen(movie)}>
+              <div key={movie.id} className="movie-item" onClick={() => openModal(movie)}>
                 <img src={`${IMAGE_BASE_URL}${movie.poster_path}`} alt={movie.title} />
                 <p>{movie.title}</p>
               </div>
@@ -102,7 +102,7 @@ const Inicio = () => {
           <h2>Mejor Calificadas</h2>
           <div className="movie-list">
             {topRatedMovies.map(movie => (
-              <div key={movie.id} className="movie-item" onClick={() => openFullscreen(movie)}>
+              <div key={movie.id} className="movie-item" onClick={() => openModal(movie)}>
                 <img src={`${IMAGE_BASE_URL}${movie.poster_path}`} alt={movie.title} />
                 <p>{movie.title}</p>
               </div>
@@ -113,7 +113,7 @@ const Inicio = () => {
           <h2>Próximos Estrenos</h2>
           <div className="movie-list">
             {upcomingMovies.map(movie => (
-              <div key={movie.id} className="movie-item" onClick={() => openFullscreen(movie)}>
+              <div key={movie.id} className="movie-item" onClick={() => openModal(movie)}>
                 <img src={`${IMAGE_BASE_URL}${movie.poster_path}`} alt={movie.title} />
                 <p>{movie.title}</p>
               </div>
@@ -121,21 +121,30 @@ const Inicio = () => {
           </div>
         </section>
       </main>
-      {fullscreenMovie && (
-        <div className="fullscreen-video" onClick={closeFullscreen}>
-          {fullscreenMovie.trailerUrl ? (
-            <iframe
-              src={fullscreenMovie.trailerUrl}
-              title={`Trailer de ${fullscreenMovie.title}`}
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-            ></iframe>
-          ) : (
-            <div className="no-trailer">
-              <p>Lo sentimos, no hay trailer disponible para esta película.</p>
+      {selectedMovie && (
+        <div className="modal-overlay" onClick={closeModal}>
+          <div className="modal-content" onClick={e => e.stopPropagation()}>
+            <span className="close-button" onClick={closeModal}>&times;</span>
+            <h2>{selectedMovie.title}</h2>
+            <p>{selectedMovie.overview}</p>
+            <div className="movie-details">
+              <p><strong>Fecha de lanzamiento:</strong> {selectedMovie.release_date}</p>
+              <p><strong>Calificación:</strong> {selectedMovie.vote_average}/10</p>
             </div>
-          )}
+            {selectedMovie.trailerUrl ? (
+              <div className="trailer-container">
+                <iframe
+                  src={selectedMovie.trailerUrl}
+                  title={`Trailer de ${selectedMovie.title}`}
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                ></iframe>
+              </div>
+            ) : (
+              <p>Lo sentimos, no hay trailer disponible para esta película.</p>
+            )}
+          </div>
         </div>
       )}
     </div>

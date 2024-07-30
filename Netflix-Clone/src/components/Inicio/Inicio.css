@@ -170,3 +170,8 @@ main {
   background: #dd2f10;
   border-color: #141414;
 }
+.trailer-container >iframe{
+  width: 100%;
+  height: 500px;
+
+}
